@@ -10,6 +10,7 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import entity.Deputados;
+import entity.Details;
 
 public class WebAPI {
 	
@@ -27,6 +28,21 @@ public class WebAPI {
 			List<Deputados> dadosDeputados = convertArrayToList(deputadosReposit.getDados());
 			return dadosDeputados;
 		}
+		
+		public static GetDetails listardetalhesdeputados(int id) throws Exception {
+
+			WebAPI ws = new WebAPI();
+			String url = "https://dadosabertos.camara.leg.br/api/v2/deputados/"+id+"?formato=json";
+
+			String json = ws.obterDados(url);
+			Gson g = new Gson();
+			GetDetails detalhesDeputadosReposit = new GetDetails();
+			detalhesDeputadosReposit = g.fromJson(json, GetDetails.class);
+			return detalhesDeputadosReposit;
+		}
+		
+		
+		
 
 		// Obtendo dados da URL
 		public String obterDados(String url) throws Exception {

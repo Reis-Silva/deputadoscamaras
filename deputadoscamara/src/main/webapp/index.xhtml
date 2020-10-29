@@ -16,51 +16,97 @@
 
 
 <h:body>
-		<h:form id="form1">
-			<p:fieldset legend="Tabela de Deputados">
-					<p:dataTable id="tabledeputados" value="#{camaraBean.deputados}"
-						var="d" width="800px" style="width: 1000;" paginator="true"
-						rows="15" widgetVar="tVirus"
-						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-						paginatorPosition="bottom" rowsPerPageTemplate="15">
+	<h:form id="form1">
+		<p:fieldset legend="Tabela de Deputados">
+			<p:dataTable id="tabledeputados" value="#{camaraBean.deputados}"
+				var="d" width="800px" style="width: 1000;" paginator="true"
+				rows="15" widgetVar="tVirus"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+				paginatorPosition="bottom" rowsPerPageTemplate="15">
 
 
-						<p:column  style="width:50px;  font-size: 14pt; text-align: center;"
-							sortBy="#{d.nome}" filterBy="#{d.nome}"
-							filterMatchMode="contains">
-							<f:facet name="header">
-								<p:outputLabel value="Nome" />
-							</f:facet>
-							<h:outputLabel value="#{d.nome}" />
-						</p:column>
+				<p:column style="width:50px;  font-size: 14pt; text-align: center;"
+					sortBy="#{d.nome}" filterBy="#{d.nome}" filterMatchMode="contains">
+					<f:facet name="header">
+						<p:outputLabel value="Nome" />
+					</f:facet>
+					<h:outputLabel value="#{d.nome}" />
+				</p:column>
 
-						<p:column style="width:10px;  font-size: 14pt; text-align: center;" 
-							sortBy="#{d.siglaPartido}" filterBy="#{d.siglaPartido}">
-							<f:facet name="header">
-								<p:outputLabel value="Partido" />
-							</f:facet>
-							<h:outputLabel value="#{d.siglaPartido}" />
-						</p:column>
+				<p:column style="width:10px;  font-size: 14pt; text-align: center;"
+					sortBy="#{d.siglaPartido}" filterBy="#{d.siglaPartido}">
+					<f:facet name="header">
+						<p:outputLabel value="Partido" />
+					</f:facet>
+					<h:outputLabel value="#{d.siglaPartido}" />
+				</p:column>
 
-						<p:column style="width:10px;  font-size: 14pt; text-align: center;"
-						sortBy="#{d.siglaUf}" filterBy="#{d.siglaUf}">
-							<f:facet name="header">
-								<p:outputLabel value="UF" />
-							</f:facet>
-							<h:outputLabel value="#{d.siglaUf}" />
-						</p:column>
+				<p:column style="width:10px;  font-size: 14pt; text-align: center;"
+					sortBy="#{d.siglaUf}" filterBy="#{d.siglaUf}">
+					<f:facet name="header">
+						<p:outputLabel value="UF" />
+					</f:facet>
+					<h:outputLabel value="#{d.siglaUf}" />
+				</p:column>
 
-						<p:column style="width:10px;  font-size: 10pt; text-align: center;">
-							<f:facet name="header">
-								<p:outputLabel value="" />
-							</f:facet>
-							<p:commandButton value="Detalhes"/>
-						</p:column>
-					</p:dataTable>
-					<hr />
-				
+				<p:column style="width:10px;  font-size: 10pt; text-align: center;">
+					<f:facet name="header">
+						<p:outputLabel value="" />
+					</f:facet>
+					<p:commandButton value="Detalhes"
+						action="#{camaraBean.buscarDetalhesDeputados(d.id)}"
+						oncomplete="PF('details').show();" update=":details" />
+				</p:column>
+			</p:dataTable>
+			<hr />
+
 		</p:fieldset>
-	</h:form>	
+	</h:form>
+
+	<p:dialog widgetVar="details" id="details" showEffect="fade"
+		hideEffect="fade" styleClass="modal-dialog"
+		header="Detalhes do deputado: #{camaraBean.detailsListDeputados.dados.nomeCivil}"
+		appendTo="@(body)" closable="true" resizable="false" responsive="true"
+		modal="true" height="auto"
+		style="width:300px;  font-size: 14pt; text-align: center;">
+		<div align="center">
+			
+			<h:form id="detailsdeputados">
+				<p:graphicImage
+						value="#{camaraBean.detailsListDeputados.dados.ultimoStatus.urlFoto}" />	
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				<h:panelGrid columns="2" border="1" layout="flex">
+
+					<p:outputLabel  
+						value="UF - Nascimento" />
+					<h:outputLabel
+						value="#{camaraBean.detailsListDeputados.dados.ufNascimento}" />
+
+					<p:outputLabel value="Sexo" />
+					<p:outputLabel
+						value="#{camaraBean.detailsListDeputados.dados.sexo}" />
+
+					<p:outputLabel value="Escolaridade" />
+					<p:outputLabel
+						value="#{camaraBean.detailsListDeputados.dados.escolaridade}" />
+
+					<p:outputLabel value="Condição Eleitoral" />
+					<p:outputLabel
+						value="#{camaraBean.detailsListDeputados.dados.ultimoStatus.condicaoEleitoral}" />
+
+					<p:outputLabel value="Situação" />
+					<p:outputLabel
+						value="#{camaraBean.detailsListDeputados.dados.ultimoStatus.situacao}" />
+
+				</h:panelGrid>
+			</h:form>
+
+		</div>
+
+
+	</p:dialog>
+
+
 </h:body>
 </html>

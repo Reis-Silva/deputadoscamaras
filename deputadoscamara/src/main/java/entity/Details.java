@@ -2,25 +2,14 @@ package entity;
 
 public class Details {
 	
-	private String situacao;
-	private String condicaoEleitoral;
+	
 	private String nomeCivil;
 	private String sexo;
 	private String ufNascimento;
 	private String escolaridade;
+	private UltimoStatus ultimoStatus;
 	
-	public String getSituacao() {
-		return situacao;
-	}
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
-	public String getCondicaoEleitoral() {
-		return condicaoEleitoral;
-	}
-	public void setCondicaoEleitoral(String condicaoEleitoral) {
-		this.condicaoEleitoral = condicaoEleitoral;
-	}
+	
 	public String getNomeCivil() {
 		return nomeCivil;
 	}
@@ -44,6 +33,12 @@ public class Details {
 	}
 	public void setEscolaridade(String escolaridade) {
 		this.escolaridade = escolaridade;
+	}
+	public UltimoStatus getUltimoStatus() {
+		return ultimoStatus;
+	}
+	public void setUltimoStatus(UltimoStatus ultimoStatus) {
+		this.ultimoStatus = ultimoStatus;
 	}
 	
 	
