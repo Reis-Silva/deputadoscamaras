@@ -2,14 +2,19 @@ package entity;
 
 public class Details {
 	
-	
+	private int id;
 	private String nomeCivil;
 	private String sexo;
 	private String ufNascimento;
 	private String escolaridade;
 	private UltimoStatus ultimoStatus;
 	
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNomeCivil() {
 		return nomeCivil;
 	}
@@ -40,7 +45,6 @@ public class Details {
 	public void setUltimoStatus(UltimoStatus ultimoStatus) {
 		this.ultimoStatus = ultimoStatus;
 	}
-	
 	
 	
 }

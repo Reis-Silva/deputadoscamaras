@@ -60,6 +60,11 @@
 				</p:column>
 			</p:dataTable>
 			<hr />
+			<p:commandButton value="Exportar"
+				actionListener="#{camaraBean.exportarjsonList()}" />
+			<h:commandButton value="Download">
+				<p:fileDownload value="#{camaraBean.exportarjsonList()}" />
+			</h:commandButton>
 
 		</p:fieldset>
 	</h:form>
@@ -71,15 +76,14 @@
 		modal="true" height="auto"
 		style="width:300px;  font-size: 14pt; text-align: center;">
 		<div align="center">
-			
+
 			<h:form id="detailsdeputados">
 				<p:graphicImage
-						value="#{camaraBean.detailsListDeputados.dados.ultimoStatus.urlFoto}" />	
+					value="#{camaraBean.detailsListDeputados.dados.ultimoStatus.urlFoto}" />
 				<p:growl id="growl" showDetail="true" sticky="true" />
 				<h:panelGrid columns="2" border="1" layout="flex">
 
-					<p:outputLabel  
-						value="UF - Nascimento" />
+					<p:outputLabel value="UF - Nascimento" />
 					<h:outputLabel
 						value="#{camaraBean.detailsListDeputados.dados.ufNascimento}" />
 
@@ -98,13 +102,12 @@
 					<p:outputLabel value="Situação" />
 					<p:outputLabel
 						value="#{camaraBean.detailsListDeputados.dados.ultimoStatus.situacao}" />
-
 				</h:panelGrid>
+				<p:commandButton value="Exportar"
+					actionListener="#{camaraBean.exportarjsonIndividual()}" />
+
 			</h:form>
-
 		</div>
-
-
 	</p:dialog>
 
 
