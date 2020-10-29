@@ -14,7 +14,7 @@ import entity.Deputados;
 public class WebAPI {
 	
 	// Armazenando Dados na lista
-		public static List<Deputados> listarCotas(String moeda, String dataInicial, String dataFinal) throws Exception {
+		public static List<Deputados> listardeputados() throws Exception {
 
 			WebAPI ws = new WebAPI();
 			String url = "https://dadosabertos.camara.leg.br/api/v2/deputados?ordem=ASC&ordenarPor=nome&formato=json";

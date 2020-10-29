@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-</body>
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Câmara Deputados</title>
+</h:head>
+
+
+
+
+<h:body>
+		<h:form id="form1">
+			<p:fieldset legend="Tabela de Deputados">
+					<p:dataTable id="tabledeputados" value="#{camaraBean.deputados}"
+						var="d" width="800px" style="width: 1000;" paginator="true"
+						rows="15" widgetVar="tVirus"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+						paginatorPosition="bottom" rowsPerPageTemplate="15">
+
+
+						<p:column  style="width:50px;  font-size: 14pt; text-align: center;"
+							sortBy="#{d.nome}" filterBy="#{d.nome}"
+							filterMatchMode="contains">
+							<f:facet name="header">
+								<p:outputLabel value="Nome" />
+							</f:facet>
+							<h:outputLabel value="#{d.nome}" />
+						</p:column>
+
+						<p:column style="width:10px;  font-size: 14pt; text-align: center;" 
+							sortBy="#{d.siglaPartido}" filterBy="#{d.siglaPartido}">
+							<f:facet name="header">
+								<p:outputLabel value="Partido" />
+							</f:facet>
+							<h:outputLabel value="#{d.siglaPartido}" />
+						</p:column>
+
+						<p:column style="width:10px;  font-size: 14pt; text-align: center;"
+						sortBy="#{d.siglaUf}" filterBy="#{d.siglaUf}">
+							<f:facet name="header">
+								<p:outputLabel value="UF" />
+							</f:facet>
+							<h:outputLabel value="#{d.siglaUf}" />
+						</p:column>
+
+						<p:column style="width:10px;  font-size: 10pt; text-align: center;">
+							<f:facet name="header">
+								<p:outputLabel value="" />
+							</f:facet>
+							<p:commandButton value="Detalhes"/>
+						</p:column>
+					</p:dataTable>
+					<hr />
+				
+		</p:fieldset>
+	</h:form>	
+</h:body>
 </html>
