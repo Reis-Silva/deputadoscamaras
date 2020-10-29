@@ -1,4 +1,4 @@
-package entity.copy;
+package entity;
 
 
 public class Deputados {
