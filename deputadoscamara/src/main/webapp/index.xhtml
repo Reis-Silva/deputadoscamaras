@@ -13,7 +13,7 @@
 </h:head>
 
 <h:body>
-	
+
 	<h:form id="form2">
 		<p:messages id="messages" showDetail="true" closable="true">
 			<p:autoUpdate />
@@ -35,7 +35,7 @@
 					</f:facet>
 					<h:outputLabel value="#{d.id}" />
 				</p:column>
-					
+
 				<p:column style="width:50px;  font-size: 14pt; text-align: center;"
 					sortBy="#{d.nome}" filterBy="#{d.nome}" filterMatchMode="contains">
 					<f:facet name="header">
@@ -61,17 +61,30 @@
 				</p:column>
 
 				<f:facet name="footer">
+					<br />
+					<p:commandButton value="Detalhes"
+						action="#{camaraBean.buscarDetalhesDeputados(camaraBean.deputado.id)}"
+						oncomplete="PF('details').show();" update=":details">
+						<p:ajaxStatus onstart="PF('statusDialog').show()"
+							onsuccess="PF('statusDialog').hide()" />
+					</p:commandButton>
 					<hr />
 					<p:commandButton value="Exportar Tabela" id="exportar"
 						actionListener="#{camaraBean.exportarjsonList()}"
-						update="form2:tabledeputados" />
-					<p:commandButton value="Detalhes"
-						action="#{camaraBean.buscarDetalhesDeputados(camaraBean.deputado.id)}"
-						oncomplete="PF('details').show();" update=":details" />
+						update="form2:tabledeputados">
+						<p:ajaxStatus onstart="PF('statusDialog').show()"
+							onsuccess="PF('statusDialog').hide()" />
+					</p:commandButton>
+
 				</f:facet>
 			</p:dataTable>
 		</p:fieldset>
 	</h:form>
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="img/salving.gif" />
+	</p:dialog>
 
 	<p:dialog widgetVar="details" id="details" showEffect="fade"
 		hideEffect="fade" styleClass="modal-dialog"
