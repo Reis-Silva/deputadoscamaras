@@ -13,7 +13,14 @@
 </h:head>
 
 <h:body>
-
+	
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="img/salving.gif" />
+	</p:dialog>
+	
 	<h:form id="form2">
 		<p:messages id="messages" showDetail="true" closable="true">
 			<p:autoUpdate />
@@ -65,26 +72,17 @@
 					<p:commandButton value="Detalhes"
 						action="#{camaraBean.buscarDetalhesDeputados(camaraBean.deputado.id)}"
 						oncomplete="PF('details').show();" update=":details">
-						<p:ajaxStatus onstart="PF('statusDialog').show()"
-							onsuccess="PF('statusDialog').hide()" />
 					</p:commandButton>
 					<hr />
 					<p:commandButton value="Exportar Tabela" id="exportar"
 						actionListener="#{camaraBean.exportarjsonList()}"
 						update="form2:tabledeputados">
-						<p:ajaxStatus onstart="PF('statusDialog').show()"
-							onsuccess="PF('statusDialog').hide()" />
 					</p:commandButton>
 
 				</f:facet>
 			</p:dataTable>
 		</p:fieldset>
 	</h:form>
-
-	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-		closable="false" resizable="false" showHeader="false">
-		<p:graphicImage name="img/salving.gif" />
-	</p:dialog>
 
 	<p:dialog widgetVar="details" id="details" showEffect="fade"
 		hideEffect="fade" styleClass="modal-dialog"
