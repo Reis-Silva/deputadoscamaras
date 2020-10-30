@@ -17,7 +17,7 @@ Neste aplicativo é possível realizar a busca e exportação dos detalhes dos d
 
 - Suporte no JavaSE-8 em diante podendo ser utilizado o jdk nas versões `8.x, 11.x, 12.x, 13.x, 14.x, 15.x`.
 
-- Suporte no Servidor Apache Tomcat versões `7.x, 8.x, 9.x`, aconselhável a versão `9.x` - Link: https://github.com/Reis-Silva/ProjetoAPICOVID/blob/main/projetovirus/pom.xml
+- Suporte no Servidor Apache Tomcat versões `7.x, 8.x, 9.x`, aconselhável a versão `9.x` - Link: https://downloads.apache.org/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39-windows-x64.zip
 
 - Dados recorrentes de dependencias do projeto podem ser utilizadas de acordo como está definido no Link do pom.xml: https://github.com/Reis-Silva/deputadoscamaras/blob/main/deputadoscamara/pom.xml desde de que esteja dentro das versões do JavaSE.
 
