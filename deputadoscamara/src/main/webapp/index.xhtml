@@ -6,30 +6,36 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Câmara Deputados</title>
 
 </h:head>
 
-
-
-
 <h:body>
-	<h:form id="form">
+	
+	<h:form id="form2">
 		<p:messages id="messages" showDetail="true" closable="true">
 			<p:autoUpdate />
 		</p:messages>
 		<p:fieldset legend="Tabela de Deputados">
 			<p:dataTable id="tabledeputados" value="#{camaraBean.deputados}"
-				var="d" width="800px" style="width: 1000;" paginator="true"
-				rows="15" widgetVar="tVirus"
+				selectionMode="single" rowKey="#{d.id}" var="d" width="800px"
+				filteredValue="#{camaraBean.filtrodeputados}" style="width: 1000;"
+				paginator="true" rows="10" widgetVar="tVirus"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-				paginatorPosition="bottom" rowsPerPageTemplate="15">
+				paginatorPosition="bottom" rowsPerPageTemplate="10">
+				<p:ajax event="rowSelect" listener="#{camaraBean.onRowSelect}" />
 
-
+				<p:column style="width:10px;  font-size: 14pt; text-align: center;"
+					sortBy="#{d.id}" filterBy="#{d.id}">
+					<f:facet name="header">
+						<p:outputLabel value="ID" />
+					</f:facet>
+					<h:outputLabel value="#{d.id}" />
+				</p:column>
+					
 				<p:column style="width:50px;  font-size: 14pt; text-align: center;"
 					sortBy="#{d.nome}" filterBy="#{d.nome}" filterMatchMode="contains">
 					<f:facet name="header">
@@ -54,22 +60,16 @@
 					<h:outputLabel value="#{d.siglaUf}" />
 				</p:column>
 
-				<p:column style="width:10px;  font-size: 10pt; text-align: center;">
-					<f:facet name="header">
-						<p:outputLabel value="" />
-					</f:facet>
+				<f:facet name="footer">
+					<hr />
+					<p:commandButton value="Exportar Tabela" id="exportar"
+						actionListener="#{camaraBean.exportarjsonList()}"
+						update="form2:tabledeputados" />
 					<p:commandButton value="Detalhes"
-						action="#{camaraBean.buscarDetalhesDeputados(d.id)}"
+						action="#{camaraBean.buscarDetalhesDeputados(camaraBean.deputado.id)}"
 						oncomplete="PF('details').show();" update=":details" />
-				</p:column>
+				</f:facet>
 			</p:dataTable>
-			<hr />
-			<h:panelGrid id="grid" columns="3" cellpadding="5">
-				<p:commandButton value="Exportar" id="exportar"
-					actionListener="#{camaraBean.exportarjsonList()}" update="grid" />
-
-			</h:panelGrid>
-
 		</p:fieldset>
 	</h:form>
 
@@ -113,7 +113,6 @@
 			</h:form>
 		</div>
 	</p:dialog>
-
 
 </h:body>
 </html>

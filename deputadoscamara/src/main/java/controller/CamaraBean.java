@@ -11,6 +11,8 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.SelectEvent;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
@@ -25,9 +27,19 @@ public class CamaraBean {
 
 	private Deputados deputado;
 	private List<Deputados> deputados;
+	private List<Deputados> filtrodeputados;
 	private Details detaildeputados;
 	private GetDetails detailsListDeputados;
 	public int id;
+	
+	
+	public List<Deputados> getFiltrodeputados() {
+		return filtrodeputados;
+	}
+
+	public void setFiltrodeputados(List<Deputados> filtrodeputados) {
+		this.filtrodeputados = filtrodeputados;
+	}
 
 	public Details getDetaildeputados() {
 		return detaildeputados;
@@ -151,5 +163,9 @@ public class CamaraBean {
 
 		buscarDeputados();
 	}
-
+	
+	public void onRowSelect(SelectEvent event) {
+    	Deputados detail = ((Deputados)event.getObject());
+    	setDeputado(detail);
+    }
 }
