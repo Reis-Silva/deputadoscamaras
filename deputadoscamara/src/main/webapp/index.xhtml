@@ -10,13 +10,17 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Câmara Deputados</title>
+
 </h:head>
 
 
 
 
 <h:body>
-	<h:form id="form1">
+	<h:form id="form">
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
 		<p:fieldset legend="Tabela de Deputados">
 			<p:dataTable id="tabledeputados" value="#{camaraBean.deputados}"
 				var="d" width="800px" style="width: 1000;" paginator="true"
@@ -60,11 +64,11 @@
 				</p:column>
 			</p:dataTable>
 			<hr />
-			<p:commandButton value="Exportar"
-				actionListener="#{camaraBean.exportarjsonList()}" />
-			<h:commandButton value="Download">
-				<p:fileDownload value="#{camaraBean.exportarjsonList()}" />
-			</h:commandButton>
+			<h:panelGrid id="grid" columns="3" cellpadding="5">
+				<p:commandButton value="Exportar" id="exportar"
+					actionListener="#{camaraBean.exportarjsonList()}" update="grid" />
+
+			</h:panelGrid>
 
 		</p:fieldset>
 	</h:form>

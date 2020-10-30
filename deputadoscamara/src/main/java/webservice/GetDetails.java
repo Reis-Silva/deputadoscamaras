@@ -1,7 +1,5 @@
 package webservice;
 
-import java.util.Arrays;
-
 import entity.Details;
 
 public class GetDetails {
