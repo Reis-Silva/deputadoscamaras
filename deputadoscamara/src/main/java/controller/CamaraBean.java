@@ -29,10 +29,24 @@ public class CamaraBean {
 	private List<Deputados> deputados;
 	private List<Deputados> filtrodeputados;
 	private Details detaildeputados;
-	private GetDetails detailsListDeputados;
-	public int id;
+	private GetDetails detailsListDeputados;	
 	
-	
+	public Deputados getDeputado() {
+		return deputado;
+	}
+
+	public void setDeputado(Deputados deputado) {
+		this.deputado = deputado;
+	}
+
+	public List<Deputados> getDeputados() {
+		return deputados;
+	}
+
+	public void setDeputados(List<Deputados> deputados) {
+		this.deputados = deputados;
+	}
+
 	public List<Deputados> getFiltrodeputados() {
 		return filtrodeputados;
 	}
@@ -57,22 +71,6 @@ public class CamaraBean {
 		this.detailsListDeputados = detailsListDeputados;
 	}
 
-	public Deputados getDeputado() {
-		return deputado;
-	}
-
-	public void setDeputado(Deputados deputado) {
-		this.deputado = deputado;
-	}
-
-	public List<Deputados> getDeputados() {
-		return deputados;
-	}
-
-	public void setDeputados(List<Deputados> deputados) {
-		this.deputados = deputados;
-	}
-
 	public void buscarDeputados() {
 		try {
 			setDeputados(WebAPI.listardeputados());
@@ -87,7 +85,6 @@ public class CamaraBean {
 		try {
 			setDetailsListDeputados(WebAPI.listardetalhesdeputados(id));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
