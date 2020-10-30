@@ -2,9 +2,9 @@
 
 Criação desenvolvida para a coleta de dados da Câmara de Deputados do Brazil, apartir do consumo da API.
 
-# Resume
+## Resume
 
-Neste aplicativo é possível realizar a busca e exportação dos deputados que estão exercendo atividades no parlamento.
+Neste aplicativo é possível realizar a busca e exportação dos detalhes dos deputados que estão exercendo atividades no parlamento.
 
 ## Source
 
