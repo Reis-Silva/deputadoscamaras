@@ -10,7 +10,6 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import entity.Deputados;
-import entity.Details;
 
 public class WebAPI {
 	
