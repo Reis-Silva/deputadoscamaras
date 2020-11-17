@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -179,6 +178,7 @@ public class CamaraBean implements Serializable{
 		buscarDeputados();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public void onRowSelect(SelectEvent event) {
     	Deputados detail = ((Deputados)event.getObject());
     	setDeputado(detail);
