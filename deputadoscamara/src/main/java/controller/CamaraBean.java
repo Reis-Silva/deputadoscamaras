@@ -3,12 +3,14 @@ package controller;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -21,11 +23,14 @@ import entity.Details;
 import webservice.GetDetails;
 import webservice.WebAPI;
 
-@ApplicationScoped
+@ViewScoped
 @ManagedBean
-public class CamaraBean {
+public class CamaraBean implements Serializable{
 
-	private Deputados deputado;
+
+	private static final long serialVersionUID = 1L;
+	private Deputados deputado = new Deputados();
+	private String selecaoDeputados;
 	private List<Deputados> deputados;
 	private List<Deputados> filtrodeputados;
 	private Details detaildeputados;
@@ -37,6 +42,14 @@ public class CamaraBean {
 
 	public void setDeputado(Deputados deputado) {
 		this.deputado = deputado;
+	}
+
+	public String getSelecaoDeputados() {
+		return selecaoDeputados;
+	}
+
+	public void setSelecaoDeputados(String selecaoDeputados) {
+		this.selecaoDeputados = selecaoDeputados;
 	}
 
 	public List<Deputados> getDeputados() {
@@ -83,7 +96,12 @@ public class CamaraBean {
 
 	public void buscarDetalhesDeputados(int id) {
 		try {
-			setDetailsListDeputados(WebAPI.listardetalhesdeputados(id));
+			if(getDeputado().getId() == null) {
+				successExport(true, "! - ", "Selecione um deputado");
+			}else {
+				setDetailsListDeputados(WebAPI.listardetalhesdeputados(id));
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -107,13 +125,13 @@ public class CamaraBean {
 			FileWriter fileWriter = new FileWriter(file);
 			fileWriter.write(json);
 			fileWriter.close();
-			successExport(true);
+			successExport(true, "Success!", "Arquivo salvo em C:\\JsonExport");
 		} catch (JsonIOException e) {
 			e.printStackTrace();
-			successExport(false);
+			successExport(false, "Failed!", "Nao foi possivel salvar...");
 		} catch (IOException e) {
 			e.printStackTrace();
-			successExport(false);
+			successExport(false, "Failed!", "Nao foi possivel salvar...");
 		}
 	}
 
@@ -135,23 +153,23 @@ public class CamaraBean {
 			FileWriter fileWriter = new FileWriter(file);
 			fileWriter.write(json);
 			fileWriter.close();
-			successExport(true);
+			successExport(true,"Success!", "Arquivo salvo em C:\\JsonExport");
 		} catch (JsonIOException e) {
 			e.printStackTrace();
-			successExport(false);
+			successExport(false, "Failed!", "Nao foi possivel salvar...");
 		} catch (IOException e) {
 			e.printStackTrace();
-			successExport(false);
+			successExport(false, "Failed!", "Nao foi possivel salvar...");
 		}
 	}
 
-	public void successExport(Boolean success) {
+	public void successExport(Boolean success, String Afirmation, String details) {
 		if (success) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Arquivo salvo em C:\\JsonExport"));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, Afirmation, details));
 		}else {
 		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed!", "Nao foi possivel salvar..."));
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, Afirmation, details));
 		}
 	}
 
@@ -164,5 +182,6 @@ public class CamaraBean {
 	public void onRowSelect(SelectEvent event) {
     	Deputados detail = ((Deputados)event.getObject());
     	setDeputado(detail);
+    	setSelecaoDeputados("PF('details').show();");
     }
 }

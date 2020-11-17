@@ -3,7 +3,7 @@ package entity;
 
 public class Deputados {
 
-	private int id;
+	private Integer id;
 	private String uri;
 	private String nome;
 	private String siglaPartido;
@@ -12,12 +12,10 @@ public class Deputados {
 	private int idLegilatura;
 	private String urlFoto;
 	private String email;
-	
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getUri() {
@@ -69,5 +67,6 @@ public class Deputados {
 		this.email = email;
 	}
 	
+
 	
 }

@@ -12,7 +12,7 @@
 	
 </h:head>
 
-<h:body>
+<h:body >
 	
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
 		onsuccess="PF('statusDialog').hide()" />
@@ -29,11 +29,9 @@
 			<p:dataTable styleClass="datatable" id="tabledeputados" value="#{camaraBean.deputados}"
 				selectionMode="single" rowKey="#{d.id}" var="d" width="800px"
 				filteredValue="#{camaraBean.filtrodeputados}" style="width: 1000;"
-				paginator="true" rows="10" widgetVar="tVirus"
-				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+				paginator="true" rows="10" widgetVar="tdeput"
 				paginatorPosition="bottom" rowsPerPageTemplate="10">
-				<p:ajax event="rowSelect" listener="#{camaraBean.onRowSelect}" />
+				<p:ajax event="rowSelect" listener="#{camaraBean.onRowSelect}" update="form2:detalhes"/>
 
 				<p:column style="width:10px;  font-size: 14pt; text-align: center;"
 					sortBy="#{d.id}" filterBy="#{d.id}">
@@ -66,21 +64,21 @@
 					</f:facet>
 					<h:outputLabel value="#{d.siglaUf}" />
 				</p:column>
-
-				<f:facet name="footer">
-					<br />
-					<p:commandButton value="Detalhes" styleClass="btn"
-						action="#{camaraBean.buscarDetalhesDeputados(camaraBean.deputado.id)}"
-						oncomplete="PF('details').show();" update=":details">
-					</p:commandButton>
-					<hr />
-					<p:commandButton value="Exportar Tabela" id="exportar"
-						actionListener="#{camaraBean.exportarjsonList()}"
-						update="form2:tabledeputados">
-					</p:commandButton>
-
-				</f:facet>
 			</p:dataTable>
+			<br/>
+			<div align="center">
+
+				<p:commandButton id="detalhes" value="Detalhes"
+					action="#{camaraBean.buscarDetalhesDeputados(camaraBean.deputado.id)}"
+					oncomplete="#{camaraBean.selecaoDeputados}" update=" :details">
+				</p:commandButton>
+				<br />
+				<br />
+				<p:commandButton value="Exportar Tabela" id="exportar"
+					actionListener="#{camaraBean.exportarjsonList()}"
+					update="form2:tabledeputados">
+				</p:commandButton>
+			</div>
 		</p:fieldset>
 	</h:form>
 
@@ -118,6 +116,7 @@
 					<p:outputLabel
 						value="#{camaraBean.detailsListDeputados.dados.ultimoStatus.situacao}" />
 				</h:panelGrid>
+				<br/>
 				<p:commandButton value="Exportar"
 					actionListener="#{camaraBean.exportarjsonIndividual()}" />
 
